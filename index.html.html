@@ -1,0 +1,196 @@
+<!--
+  github-pages-website - single-file static site
+  Instructions:
+  1. Create a new GitHub repository (public or private).
+  2. Add this file as `index.html` at the repository root. Commit & push.
+  3. On GitHub: Settings -> Pages -> Branch: `main` (root) -> Save. Your site will publish at https://<username>.github.io/<repo-name>/ (or https://<username>.github.io/ if repo is named <username>.github.io).
+  4. To use a custom domain, follow GitHub Pages docs and add a CNAME file.
+
+  This single file contains:
+   - Responsive hero section
+   - Project grid (editable)
+   - About section
+   - Contact form that opens email client
+   - Light/dark mode toggle
+   - Easy instructions comments where to edit project entries
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your GitHub Pages Website</title>
+  <meta name="description" content="A clean, responsive single-file site ready for GitHub Pages." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#5eead4; --glass: rgba(255,255,255,0.04);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    [data-theme="light"]{ --bg:#f7fbff; --card:#ffffff; --muted:#5b6b7a; --accent:#0ea5a0; --glass: rgba(0,0,0,0.04);} 
+    *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,var(--bg),#0b1220);color:var(--muted);-webkit-font-smoothing:antialiased}
+    .container{max-width:1024px;margin:36px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#031022;font-weight:700;font-size:18px}
+    h1{margin:0;color:var(--card);font-size:clamp(22px,4vw,34px);color:var(--accent)}
+    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+
+    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;padding:28px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px)}
+    .hero-grid{display:flex;flex-direction:column;gap:12px}
+    .cta{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#021019;font-weight:700;text-decoration:none}
+    .muted{color:var(--muted)}
+
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);color:inherit}
+    .card h3{margin:0 0 8px 0;color:inherit}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass);color:var(--muted)}
+
+    footer{margin-top:32px;text-align:center;color:var(--muted);font-size:14px}
+
+    .top-actions{display:flex;gap:10px;align-items:center}
+    .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+    /* responsive */
+    @media (max-width:780px){
+      .projects{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start;gap:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <header>
+      <div class="brand">
+        <div class="logo">GH</div>
+        <div>
+          <div style="font-weight:700;color:var(--card)">Your Name</div>
+          <div style="font-size:13px;color:var(--muted)">Developer • Open Source • Builder</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <nav>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌓</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <h1>Hello — I build things on GitHub.</h1>
+        <p class="muted">This is a starter site ready for GitHub Pages. Showcase projects, link to repos, and collect contact leads.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="cta" href="#projects">View projects</a>
+          <a class="icon-btn" href="https://github.com/" target="_blank" rel="noopener">View GitHub</a>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-direction:column;align-items:flex-end">
+        <div class="card" style="width:100%;max-width:360px">
+          <h3>Featured Repo</h3>
+          <p class="muted" id="featuredDesc">Edit this text to describe your featured repository. Add a short blurb and link.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <a href="#" id="featuredLink" class="muted">Open repo →</a>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Open-source</span></div>
+          </div>
+        </div>
+        <div class="card" style="max-width:360px;text-align:center">
+          <div style="font-size:12px;color:var(--muted)">Quick stats</div>
+          <div style="display:flex;justify-content:space-around;margin-top:10px">
+            <div>
+              <div style="font-weight:700;color:var(--accent)">42</div>
+              <div style="font-size:12px;color:var(--muted)">Repos</div>
+            </div>
+            <div>
+              <div style="font-weight:700;color:var(--accent)">1.2k</div>
+              <div style="font-size:12px;color:var(--muted)">Stars</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 style="color:var(--card);margin-top:28px">Projects</h2>
+      <div class="projects" id="projectGrid">
+        <!-- Duplicate this block to add projects. Edit title, description, tags, and link -->
+        <article class="card">
+          <h3>Project Title</h3>
+          <p class="muted">Short description of the project. Replace with your repo description and what it does.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <a href="#" class="muted">View repo →</a>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Another Repo</h3>
+          <p class="muted">One-line summary. Keep it short and friendly.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+            <a href="#" class="muted">View repo →</a>
+            <div class="tags"><span class="tag">React</span><span class="tag">Docs</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" style="margin-top:20px">
+      <h2 style="color:var(--card)">About</h2>
+      <div class="card" style="margin-top:10px">
+        <p class="muted">I'm a developer who loves open-source. Edit this section to add a short bio, links to social profiles, or your resume.</p>
+        <p style="margin-top:12px"><a class="muted" href="#">Download resume (PDF)</a></p>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:20px">
+      <h2 style="color:var(--card)">Contact</h2>
+      <div class="card" style="margin-top:10px;display:flex;flex-direction:column;gap:10px">
+        <p class="muted">Want to work together? Send an email or open an issue on a repo.</p>
+        <a class="cta" href="mailto:your@email.com?subject=Website%20Inquiry">Email me</a>
+      </div>
+    </section>
+
+    <footer>
+      <div>Made with ❤️ · Host it on GitHub Pages • <a href="#">Edit on GitHub</a></div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle (persists in localStorage)
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if(saved === 'light') document.documentElement.setAttribute('data-theme','light');
+    btn.addEventListener('click', ()=>{
+      const cur = document.documentElement.getAttribute('data-theme');
+      if(cur === 'light'){
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.removeItem('theme');
+      } else {
+        document.documentElement.setAttribute('data-theme','light');
+        localStorage.setItem('theme','light');
+      }
+    });
+
+    // Editable: set featured repo details here
+    const featuredLink = document.getElementById('featuredLink');
+    const featuredDesc = document.getElementById('featuredDesc');
+    featuredLink.href = 'https://github.com/your-username/your-repo';
+    featuredLink.textContent = 'github.com/your-username/your-repo';
+    featuredDesc.textContent = 'A short blurb about your featured project. Replace this in the file or via script.';
+
+    // Optional: fetch GitHub repo data (uncomment and add username) - works on GitHub Pages if CORS allowed
+    /*
+    fetch('https://api.github.com/users/your-username/repos')
+      .then(r=>r.json())
+      .then(data=>{
+        // populate projects dynamically
+      })
+    */
+  </script>
+</body>
+</html>
