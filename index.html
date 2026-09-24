@@ -1,196 +1,77 @@
-<!--
-  github-pages-website - single-file static site
-  Instructions:
-  1. Create a new GitHub repository (public or private).
-  2. Add this file as `index.html` at the repository root. Commit & push.
-  3. On GitHub: Settings -> Pages -> Branch: `main` (root) -> Save. Your site will publish at https://<username>.github.io/<repo-name>/ (or https://<username>.github.io/ if repo is named <username>.github.io).
-  4. To use a custom domain, follow GitHub Pages docs and add a CNAME file.
-
-  This single file contains:
-   - Responsive hero section
-   - Project grid (editable)
-   - About section
-   - Contact form that opens email client
-   - Light/dark mode toggle
-   - Easy instructions comments where to edit project entries
--->
-
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your GitHub Pages Website</title>
-  <meta name="description" content="A clean, responsive single-file site ready for GitHub Pages." />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#5eead4; --glass: rgba(255,255,255,0.04);
-      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    [data-theme="light"]{ --bg:#f7fbff; --card:#ffffff; --muted:#5b6b7a; --accent:#0ea5a0; --glass: rgba(0,0,0,0.04);} 
-    *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:var(--font-sans);background:linear-gradient(180deg,var(--bg),#0b1220);color:var(--muted);-webkit-font-smoothing:antialiased}
-    .container{max-width:1024px;margin:36px auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#031022;font-weight:700;font-size:18px}
-    h1{margin:0;color:var(--card);font-size:clamp(22px,4vw,34px);color:var(--accent)}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
-
-    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;padding:28px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px)}
-    .hero-grid{display:flex;flex-direction:column;gap:12px}
-    .cta{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#021019;font-weight:700;text-decoration:none}
-    .muted{color:var(--muted)}
-
-    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);color:inherit}
-    .card h3{margin:0 0 8px 0;color:inherit}
-    .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:var(--glass);color:var(--muted)}
-
-    footer{margin-top:32px;text-align:center;color:var(--muted);font-size:14px}
-
-    .top-actions{display:flex;gap:10px;align-items:center}
-    .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer}
-
-    /* responsive */
-    @media (max-width:780px){
-      .projects{grid-template-columns:1fr}
-      header{flex-direction:column;align-items:flex-start;gap:14px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lincoln Home Maintenance | Reliable Property Maintenance</title>
+<meta name="description" content="Lincoln Home Maintenance — professional home and property maintenance services. Get in touch for a quote.">
+<style>
+:root{--dark:#17212b;--blue:#1f5f8b;--light:#f4f7f9;--text:#25313b;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.6;background:#fff}
+header{background:var(--dark);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #0002}
+.nav{max-width:1100px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:.3px}.logo span{color:#74b7df}
+nav a{color:#fff;text-decoration:none;margin-left:22px;font-weight:600;font-size:.95rem}
+.hero{background:linear-gradient(135deg,#17212b,#275f83);color:#fff;padding:90px 22px}
+.hero-inner{max-width:1100px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-weight:700;color:#9ed3ef}
+h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.05;margin:12px 0 20px;max-width:780px}
+.hero p{font-size:1.2rem;max-width:680px;color:#e9f2f7}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:13px 20px;border-radius:7px;text-decoration:none;font-weight:800}.primary{background:#fff;color:var(--dark)}.secondary{border:2px solid #fff;color:#fff}
+section{padding:70px 22px}.wrap{max-width:1100px;margin:auto}h2{font-size:2.1rem;margin:0 0 12px;color:var(--dark)}.lead{max-width:700px;color:#586875}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}.card{background:var(--light);padding:26px;border-radius:12px;border:1px solid #e2e8ec}.card h3{margin-top:0;color:var(--dark)}
+.icon{font-size:2rem}.band{background:#eef5f9}.why{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.checks{list-style:none;padding:0}.checks li{margin:14px 0;padding-left:28px;position:relative}.checks li:before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:900}
+.contact{background:var(--dark);color:#fff}.contact h2{color:#fff}.contact a{color:#a9dcf8}.contact-box{display:grid;grid-template-columns:1fr 1fr;gap:30px}.contact-item{padding:22px 0;border-bottom:1px solid #ffffff22}
+footer{background:#101820;color:#b9c4cb;text-align:center;padding:25px 22px;font-size:.9rem}
+@media(max-width:760px){nav{display:none}.grid,.why,.contact-box{grid-template-columns:1fr}.hero{padding:65px 22px}section{padding:55px 22px}}
+</style>
 </head>
 <body>
-  <div class="container" id="app">
-    <header>
-      <div class="brand">
-        <div class="logo">GH</div>
-        <div>
-          <div style="font-weight:700;color:var(--card)">Your Name</div>
-          <div style="font-size:13px;color:var(--muted)">Developer • Open Source • Builder</div>
-        </div>
-      </div>
-      <div class="top-actions">
-        <nav>
-          <a href="#projects">Projects</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌓</button>
-      </div>
-    </header>
+<header>
+<div class="nav"><div class="logo">Lincoln <span>Home Maintenance</span></div>
+<nav><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></nav></div>
+</header>
 
-    <section class="hero">
-      <div class="hero-grid">
-        <h1>Hello — I build things on GitHub.</h1>
-        <p class="muted">This is a starter site ready for GitHub Pages. Showcase projects, link to repos, and collect contact leads.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="cta" href="#projects">View projects</a>
-          <a class="icon-btn" href="https://github.com/" target="_blank" rel="noopener">View GitHub</a>
-        </div>
-      </div>
-      <div style="display:flex;gap:12px;flex-direction:column;align-items:flex-end">
-        <div class="card" style="width:100%;max-width:360px">
-          <h3>Featured Repo</h3>
-          <p class="muted" id="featuredDesc">Edit this text to describe your featured repository. Add a short blurb and link.</p>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-            <a href="#" id="featuredLink" class="muted">Open repo →</a>
-            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Open-source</span></div>
-          </div>
-        </div>
-        <div class="card" style="max-width:360px;text-align:center">
-          <div style="font-size:12px;color:var(--muted)">Quick stats</div>
-          <div style="display:flex;justify-content:space-around;margin-top:10px">
-            <div>
-              <div style="font-weight:700;color:var(--accent)">42</div>
-              <div style="font-size:12px;color:var(--muted)">Repos</div>
-            </div>
-            <div>
-              <div style="font-weight:700;color:var(--accent)">1.2k</div>
-              <div style="font-size:12px;color:var(--muted)">Stars</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<main>
+<section class="hero">
+<div class="hero-inner">
+<div class="eyebrow">Professional Property Maintenance</div>
+<h1>Keeping your home looking its best.</h1>
+<p>Reliable, practical home maintenance from Lincoln Home Maintenance. Quality workmanship, straightforward service and attention to detail.</p>
+<div class="buttons"><a class="btn primary" href="#contact">Get a Quote</a><a class="btn secondary" href="tel:PHONE">Call Us</a></div>
+</div>
+</section>
 
-    <section id="projects">
-      <h2 style="color:var(--card);margin-top:28px">Projects</h2>
-      <div class="projects" id="projectGrid">
-        <!-- Duplicate this block to add projects. Edit title, description, tags, and link -->
-        <article class="card">
-          <h3>Project Title</h3>
-          <p class="muted">Short description of the project. Replace with your repo description and what it does.</p>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-            <a href="#" class="muted">View repo →</a>
-            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
-          </div>
-        </article>
+<section id="services">
+<div class="wrap">
+<h2>Our Services</h2>
+<p class="lead">A professional maintenance service for the jobs that keep your home, property and outdoor spaces in good condition.</p>
+<div class="grid">
+<div class="card"><div class="icon">🔨</div><h3>General Maintenance</h3><p>Practical repairs, maintenance and improvements around the home.</p></div>
+<div class="card"><div class="icon">🏠</div><h3>Home Improvements</h3><p>Helping you improve, refresh and maintain your property with a quality finish.</p></div>
+<div class="card"><div class="icon">🛠️</div><h3>Repairs &amp; Fixes</h3><p>From everyday jobs to those awkward repairs you've been putting off.</p></div>
+</div>
+</div>
+</section>
 
-        <article class="card">
-          <h3>Another Repo</h3>
-          <p class="muted">One-line summary. Keep it short and friendly.</p>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-            <a href="#" class="muted">View repo →</a>
-            <div class="tags"><span class="tag">React</span><span class="tag">Docs</span></div>
-          </div>
-        </article>
-      </div>
-    </section>
+<section id="about" class="band">
+<div class="wrap why">
+<div><h2>Why choose Lincoln Home Maintenance?</h2><p class="lead">We believe good maintenance should be dependable, professional and hassle-free.</p></div>
+<ul class="checks"><li>Professional and reliable service</li><li>Attention to detail</li><li>Clear communication</li><li>Quality-focused workmanship</li><li>Friendly, straightforward approach</li></ul>
+</div>
+</section>
 
-    <section id="about" style="margin-top:20px">
-      <h2 style="color:var(--card)">About</h2>
-      <div class="card" style="margin-top:10px">
-        <p class="muted">I'm a developer who loves open-source. Edit this section to add a short bio, links to social profiles, or your resume.</p>
-        <p style="margin-top:12px"><a class="muted" href="#">Download resume (PDF)</a></p>
-      </div>
-    </section>
-
-    <section id="contact" style="margin-top:20px">
-      <h2 style="color:var(--card)">Contact</h2>
-      <div class="card" style="margin-top:10px;display:flex;flex-direction:column;gap:10px">
-        <p class="muted">Want to work together? Send an email or open an issue on a repo.</p>
-        <a class="cta" href="mailto:your@email.com?subject=Website%20Inquiry">Email me</a>
-      </div>
-    </section>
-
-    <footer>
-      <div>Made with ❤️ · Host it on GitHub Pages • <a href="#">Edit on GitHub</a></div>
-    </footer>
-  </div>
-
-  <script>
-    // Theme toggle (persists in localStorage)
-    const root = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if(saved === 'light') document.documentElement.setAttribute('data-theme','light');
-    btn.addEventListener('click', ()=>{
-      const cur = document.documentElement.getAttribute('data-theme');
-      if(cur === 'light'){
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.removeItem('theme');
-      } else {
-        document.documentElement.setAttribute('data-theme','light');
-        localStorage.setItem('theme','light');
-      }
-    });
-
-    // Editable: set featured repo details here
-    const featuredLink = document.getElementById('featuredLink');
-    const featuredDesc = document.getElementById('featuredDesc');
-    featuredLink.href = 'https://github.com/your-username/your-repo';
-    featuredLink.textContent = 'github.com/your-username/your-repo';
-    featuredDesc.textContent = 'A short blurb about your featured project. Replace this in the file or via script.';
-
-    // Optional: fetch GitHub repo data (uncomment and add username) - works on GitHub Pages if CORS allowed
-    /*
-    fetch('https://api.github.com/users/your-username/repos')
-      .then(r=>r.json())
-      .then(data=>{
-        // populate projects dynamically
-      })
-    */
-  </script>
+<section id="contact" class="contact">
+<div class="wrap">
+<h2>Get in touch</h2><p>Contact Lincoln Home Maintenance to discuss your job or request a quote.</p>
+<div class="contact-box">
+<div><div class="contact-item"><strong>Phone</strong><br><a href="tel:PHONE">PHONE</a></div>
+<div class="contact-item"><strong>Email</strong><br><a href="mailto:mralexlincoln@hotmail.com">mralexlincoln@hotmail.com</a></div></div>
+<div><div class="contact-item"><strong>Lincoln Home Maintenance</strong><br>Professional home &amp; property maintenance</div>
+<div class="contact-item"><strong>Quote enquiries</strong><br>Tell us what work you need and we'll be happy to discuss it.</div></div>
+</div>
+</div>
+</section>
+</main>
+<footer>© 2026 Lincoln Home Maintenance. All rights reserved.</footer>
 </body>
 </html>
